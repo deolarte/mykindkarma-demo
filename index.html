@@ -63,7 +63,7 @@
   <div class="bg-[#2E5644] text-white/90 text-xs py-2.5 px-4 text-center border-b border-stone-800/10 flex items-center justify-center gap-2">
     <span class="inline-flex items-center rounded-full bg-white/15 px-2.5 py-0.5 text-[11px] font-medium tracking-wide">501(c)(3) Nonprofit</span>
     <span>Empowering businesses and individuals to amplify kindness with zero platform fees.</span>
-    <a href="#mobile-app" class="underline font-semibold text-emerald-200 hover:text-white ml-1">Get Mobile App &rarr;</a>
+    <a href="#calculator" class="underline font-semibold text-emerald-200 hover:text-white ml-1">Try the 3-Way Impact Calculator &rarr;</a>
   </div>
 
   <!-- Navigation -->
@@ -84,8 +84,8 @@
       <!-- Desktop Nav -->
       <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-stone-600">
         <a href="#what" class="hover:text-[#2E5644] transition text-stone-900 font-semibold">What We Do</a>
-        <a href="#mobile-app" class="hover:text-[#2E5644] transition">Mobile App (iOS & Android)</a>
-        <a href="#calculator" class="hover:text-[#2E5644] transition">Impact Simulator</a>
+        <a href="#calculator" class="hover:text-[#2E5644] transition">Impact Calculators</a>
+        <a href="#mobile-app" class="hover:text-[#2E5644] transition">Mobile App</a>
         <a href="#governance" class="hover:text-[#2E5644] transition">Leadership & Board</a>
       </nav>
 
@@ -108,8 +108,8 @@
     <!-- Mobile Navigation Drawer -->
     <div id="mobile-menu" class="hidden md:hidden bg-[#FAF8F5] border-b border-stone-200 px-4 pt-3 pb-6 space-y-3">
       <a href="#what" onclick="toggleMobileMenu()" class="block py-2 text-sm font-semibold text-stone-900">What We Do</a>
+      <a href="#calculator" onclick="toggleMobileMenu()" class="block py-2 text-sm font-semibold text-stone-700">Impact Calculators (3 Types)</a>
       <a href="#mobile-app" onclick="toggleMobileMenu()" class="block py-2 text-sm font-semibold text-stone-700">Mobile App (iOS & Android)</a>
-      <a href="#calculator" onclick="toggleMobileMenu()" class="block py-2 text-sm font-semibold text-stone-700">Impact Simulator</a>
       <a href="#governance" onclick="toggleMobileMenu()" class="block py-2 text-sm font-semibold text-stone-700">Leadership & Board</a>
       <div class="pt-2 flex flex-col gap-2">
         <a href="#contact" onclick="toggleMobileMenu()" class="text-center py-2.5 bg-[#2E5644] text-white font-bold text-xs rounded-xl">Partner With Us</a>
@@ -140,12 +140,12 @@
 
         <!-- CTA Buttons -->
         <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="#mobile-app" class="w-full sm:w-auto px-7 py-3.5 bg-[#2E5644] hover:bg-[#234234] text-white font-medium rounded-xl text-sm transition shadow-sm flex items-center justify-center gap-2">
-            <span>Explore iOS & Android App</span>
+          <a href="#calculator" class="w-full sm:w-auto px-7 py-3.5 bg-[#2E5644] hover:bg-[#234234] text-white font-medium rounded-xl text-sm transition shadow-sm flex items-center justify-center gap-2">
+            <span>Calculate Your Impact & Match</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
-          <a href="#calculator" class="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-stone-50 text-stone-800 border border-stone-300 font-medium rounded-xl text-sm transition flex items-center justify-center gap-2">
-            <span>Impact & Matching Simulator</span>
+          <a href="#mobile-app" class="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-stone-50 text-stone-800 border border-stone-300 font-medium rounded-xl text-sm transition flex items-center justify-center gap-2">
+            <span>Explore iOS & Android App</span>
           </a>
         </div>
 
@@ -173,8 +173,374 @@
     </div>
   </section>
 
+  <!-- MULTI-MODE IMPACT CALCULATOR (ALL 3 AUDIENCE TYPES) -->
+  <section id="calculator" class="py-20 bg-[#F4EFEA] border-t border-b border-stone-200 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <div class="pill-tag inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold mb-3">
+          Interactive Generosity Simulator
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-stone-900 font-serif-heading">
+          See How Kindness Multiplies.
+        </h2>
+        <p class="mt-2 text-stone-600 text-sm sm:text-base">
+          Choose your perspective to calculate personal micro-giving, workplace matching, or nonprofit sustainer revenue.
+        </p>
+      </div>
+
+      <!-- 3-Way Mode Tabs -->
+      <div class="flex justify-center mb-8">
+        <div class="inline-flex p-1.5 rounded-2xl bg-white border border-stone-300 shadow-sm gap-1 flex-wrap justify-center" id="calc-tabs">
+          <button onclick="switchCalcMode('personal')" id="calc-tab-personal" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#2E5644] text-white transition shadow-sm flex items-center gap-2">
+            <span>☕ Personal Giving</span>
+            <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded-md">Coffee vs. Impact</span>
+          </button>
+          <button onclick="switchCalcMode('corporate')" id="calc-tab-corporate" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-transparent text-stone-600 hover:text-stone-900 transition flex items-center gap-2">
+            <span>🏢 Corporate Teams</span>
+            <span class="text-[10px] bg-stone-100 px-2 py-0.5 rounded-md text-stone-500">Workplace Match</span>
+          </button>
+          <button onclick="switchCalcMode('nonprofit')" id="calc-tab-nonprofit" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-transparent text-stone-600 hover:text-stone-900 transition flex items-center gap-2">
+            <span>🤝 Nonprofit Partners</span>
+            <span class="text-[10px] bg-stone-100 px-2 py-0.5 rounded-md text-stone-500">Sustainer Pools</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Calculator Card -->
+      <div class="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200 shadow-sm relative overflow-hidden">
+        
+        <!-- =================================================== -->
+        <!-- MODE 1: PERSONAL / COFFEE VS DONATION CALCULATOR   -->
+        <!-- =================================================== -->
+        <div id="calc-mode-personal" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left: Controls -->
+          <div class="lg:col-span-7">
+            <div class="badge-warm inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3">
+              Micro-Kindness Habit Simulator
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-stone-900 font-serif-heading tracking-tight">
+              Turn Your Daily Coffee into Life-Changing Community Impact.
+            </h3>
+            <p class="mt-2 text-stone-600 text-sm leading-relaxed">
+              Small everyday choices create extraordinary change. A single cup of artisan coffee ($5.50) redirected each week provides dozens of meals or essential classroom supplies.
+            </p>
+
+            <div class="mt-8 space-y-6">
+              
+              <!-- Habit Slider: Coffees per week -->
+              <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <span class="text-stone-800 flex items-center gap-2">
+                    <span>☕</span> Cups of Coffee per Week
+                  </span>
+                  <span id="coffee-val" class="text-[#8A4A28] font-bold text-base">2 Cups / week ($11.00/wk)</span>
+                </div>
+                <input type="range" id="coffee-slider" min="1" max="7" step="1" value="2" class="w-full accent-[#8A4A28] cursor-pointer bg-stone-200 h-2 rounded-lg" oninput="calculatePersonalImpact()">
+                <div class="flex justify-between text-[11px] text-stone-400 mt-1">
+                  <span>1 coffee ($24/mo)</span>
+                  <span>4 coffees ($95/mo)</span>
+                  <span>7 coffees ($167/mo)</span>
+                </div>
+              </div>
+
+              <!-- Quick Habit Presets -->
+              <div>
+                <div class="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">Or choose a quick daily equivalent:</div>
+                <div class="grid grid-cols-3 gap-2">
+                  <button type="button" onclick="setCoffeePreset(1)" class="py-2 px-3 rounded-xl border border-stone-200 bg-[#FAF8F5] hover:bg-stone-100 text-xs font-semibold text-stone-700 transition text-center">
+                    ☕ 1 Coffee / wk<br><span class="font-normal text-stone-500">$24/mo</span>
+                  </button>
+                  <button type="button" onclick="setCoffeePreset(3)" class="py-2 px-3 rounded-xl border border-stone-200 bg-[#FAF8F5] hover:bg-stone-100 text-xs font-semibold text-stone-700 transition text-center">
+                    ☕ 3 Coffees / wk<br><span class="font-normal text-stone-500">$72/mo</span>
+                  </button>
+                  <button type="button" onclick="setCoffeePreset(5)" class="py-2 px-3 rounded-xl border border-stone-200 bg-[#FAF8F5] hover:bg-stone-100 text-xs font-semibold text-stone-700 transition text-center">
+                    🥪 1 Lunch / wk<br><span class="font-normal text-stone-500">$120/mo</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Employer Match Toggle -->
+              <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200 flex items-center justify-between">
+                <div>
+                  <div class="text-sm font-semibold text-stone-800">Employer 1:1 Matching Available?</div>
+                  <div class="text-xs text-stone-500">Doubles your contribution instantly through your company</div>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="personal-match-toggle" checked class="sr-only peer" onchange="calculatePersonalImpact()">
+                  <div class="w-11 h-6 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2E5644]"></div>
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right: Calculated Tangible Impact Card -->
+          <div class="lg:col-span-5 bg-[#8A4A28] text-white rounded-2xl p-7 sm:p-9 flex flex-col justify-between shadow-lg relative">
+            <div>
+              <div class="text-xs uppercase font-semibold tracking-widest text-amber-200/90 mb-1 font-sans-heading">
+                Your Annual Generosity Impact
+              </div>
+              <div id="personal-total-impact" class="text-4xl sm:text-5xl font-bold font-serif-heading tracking-tight text-white mt-1">
+                $1,144
+              </div>
+              <p id="personal-monthly-breakdown" class="text-xs text-amber-100/90 mt-1 font-light">
+                $47.67/mo from you + $47.67/mo employer match
+              </p>
+
+              <!-- Tangible Community Impact -->
+              <div class="mt-6 pt-6 border-t border-white/20 space-y-3.5 text-xs sm:text-sm">
+                <div class="flex items-center justify-between text-white/95">
+                  <span>🍲 Fresh Meals Provided*:</span>
+                  <span id="personal-meals" class="font-bold text-amber-200">~2,860 Meals</span>
+                </div>
+                <div class="flex items-center justify-between text-white/95">
+                  <span>📚 School Supplies Funded*:</span>
+                  <span id="personal-books" class="font-bold text-white">~57 Student Kits</span>
+                </div>
+                <div class="flex items-center justify-between text-white/95">
+                  <span>💧 Clean Water Provided*:</span>
+                  <span id="personal-water" class="font-bold text-amber-200">~190 Months of Water</span>
+                </div>
+                <div class="flex items-center justify-between text-white/95">
+                  <span>🧾 Tax Deduction Hub:</span>
+                  <span class="font-bold text-white">100% Deductible</span>
+                </div>
+              </div>
+
+              <p class="text-[11px] text-white/70 mt-4 leading-normal italic">
+                *Impact conversions calculated using standard hunger, education, and clean water 501(c)(3) benchmarks.
+              </p>
+            </div>
+
+            <div class="mt-8">
+              <a href="#mobile-app" class="block w-full text-center py-3.5 px-4 bg-white hover:bg-stone-100 text-[#8A4A28] font-bold text-sm rounded-xl transition shadow-sm">
+                Start 1-Tap Micro-Giving on Mobile &rarr;
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- =================================================== -->
+        <!-- MODE 2: CORPORATE / WORKPLACE MATCHING CALCULATOR  -->
+        <!-- =================================================== -->
+        <div id="calc-mode-corporate" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left: Controls -->
+          <div class="lg:col-span-7">
+            <div class="pill-tag inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3">
+              Corporate CSR & Workplace Giving
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-stone-900 font-serif-heading tracking-tight">
+              Workplace Matching & Team Philanthropy ROI.
+            </h3>
+            <p class="mt-2 text-stone-600 text-sm leading-relaxed">
+              Automate employee matching grants without spreadsheets. See your collective team impact, administrative time saved, and platform fee reduction.
+            </p>
+
+            <div class="mt-8 space-y-6">
+              
+              <!-- Slider 1: Headcount -->
+              <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <span class="text-stone-800">Team Headcount</span>
+                  <span id="corp-headcount-val" class="text-[#2E5644] font-bold text-base">250 Employees</span>
+                </div>
+                <input type="range" id="corp-headcount" min="20" max="2500" step="10" value="250" class="w-full accent-[#2E5644] cursor-pointer bg-stone-200 h-2 rounded-lg" oninput="calculateCorpImpact()">
+                <div class="flex justify-between text-[11px] text-stone-400 mt-1">
+                  <span>20 people</span>
+                  <span>2,500+ team</span>
+                </div>
+              </div>
+
+              <!-- Slider 2: Annual Match -->
+              <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <span class="text-stone-800">Company Match Allowance / Employee</span>
+                  <span id="corp-match-val" class="text-[#2E5644] font-bold text-base">$500 / year</span>
+                </div>
+                <input type="range" id="corp-match" min="100" max="2500" step="50" value="500" class="w-full accent-[#2E5644] cursor-pointer bg-stone-200 h-2 rounded-lg" oninput="calculateCorpImpact()">
+                <div class="flex justify-between text-[11px] text-stone-400 mt-1">
+                  <span>$100 / yr</span>
+                  <span>$2,500 / yr</span>
+                </div>
+              </div>
+
+              <!-- Slider 3: Participation -->
+              <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <span class="text-stone-800">Employee Participation Rate</span>
+                  <span id="corp-participation-val" class="text-[#8A4A28] font-bold text-base">65% of team</span>
+                </div>
+                <input type="range" id="corp-participation" min="20" max="95" step="5" value="65" class="w-full accent-[#8A4A28] cursor-pointer bg-stone-200 h-2 rounded-lg" oninput="calculateCorpImpact()">
+                <div class="flex justify-between text-[11px] text-stone-400 mt-1">
+                  <span>20% (Modest)</span>
+                  <span>95% (High Engagement)</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right: Calculated Corporate Card -->
+          <div class="lg:col-span-5 bg-[#2E5644] text-white rounded-2xl p-7 sm:p-9 flex flex-col justify-between shadow-lg relative">
+            <div>
+              <div class="text-xs uppercase font-semibold tracking-widest text-emerald-200/90 mb-1 font-sans-heading">
+                Collective Annual Impact
+              </div>
+              <div id="corp-total-impact" class="text-4xl sm:text-5xl font-bold font-serif-heading tracking-tight text-white mt-1">
+                $162,500
+              </div>
+              <p class="text-xs text-emerald-100/80 mt-1 font-light">Employee donations + 100% company matching grant</p>
+
+              <div class="mt-6 pt-6 border-t border-white/15 space-y-3.5 text-xs sm:text-sm">
+                <div class="flex items-center justify-between text-white/90">
+                  <span>👥 Active Giving Champions:</span>
+                  <span id="corp-active-donors" class="font-semibold text-white">163 team members</span>
+                </div>
+                <div class="flex items-center justify-between text-white/90">
+                  <span>🍲 Community Meals Provided:</span>
+                  <span id="corp-meals-impact" class="font-semibold text-emerald-200">~65,000 Meals</span>
+                </div>
+                <div class="flex items-center justify-between text-white/90">
+                  <span>⏳ HR Admin Hours Saved:</span>
+                  <span id="corp-hours-saved" class="font-semibold text-white">~140 Hours / yr</span>
+                </div>
+                <div class="flex items-center justify-between text-white/90">
+                  <span>💚 Platform Surcharge Saved:</span>
+                  <span id="corp-fees-saved" class="font-semibold text-emerald-200">$13,000 (0% fees)</span>
+                </div>
+              </div>
+
+              <p class="text-[11px] text-white/60 mt-4 leading-normal italic">
+                *0% platform surcharge vs 8% legacy corporate giving platform fees.
+              </p>
+            </div>
+
+            <div class="mt-8">
+              <a href="#contact" class="block w-full text-center py-3.5 px-4 bg-white hover:bg-stone-100 text-[#2E5644] font-bold text-sm rounded-xl transition shadow-sm">
+                Launch Workplace Matching Pilot &rarr;
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- =================================================== -->
+        <!-- MODE 3: NONPROFIT SUSTAINER & MATCH CALCULATOR     -->
+        <!-- =================================================== -->
+        <div id="calc-mode-nonprofit" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left: Controls -->
+          <div class="lg:col-span-7">
+            <div class="pill-tag inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3">
+              Nonprofit Partner Revenue & Retention
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-stone-900 font-serif-heading tracking-tight">
+              Predictable Monthly Giving & Corporate Matching Pools.
+            </h3>
+            <p class="mt-2 text-stone-600 text-sm leading-relaxed">
+              Calculate the predictable annual funding your 501(c)(3) unlocks when recurring givers match through My Kind Karma with zero platform deduction.
+            </p>
+
+            <div class="mt-8 space-y-6">
+              
+              <!-- Slider 1: Active Donors -->
+              <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <span class="text-stone-800">Active Recurring Sustainers</span>
+                  <span id="np-donors-val" class="text-[#2E5644] font-bold text-base">350 Donors</span>
+                </div>
+                <input type="range" id="np-donors" min="25" max="3000" step="25" value="350" class="w-full accent-[#2E5644] cursor-pointer bg-stone-200 h-2 rounded-lg" oninput="calculateNpImpact()">
+                <div class="flex justify-between text-[11px] text-stone-400 mt-1">
+                  <span>25 donors</span>
+                  <span>3,000 sustainers</span>
+                </div>
+              </div>
+
+              <!-- Slider 2: Average Monthly Gift -->
+              <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <span class="text-stone-800">Average Monthly Gift per Sustainer</span>
+                  <span id="np-gift-val" class="text-[#2E5644] font-bold text-base">$35 / month</span>
+                </div>
+                <input type="range" id="np-gift" min="5" max="150" step="5" value="35" class="w-full accent-[#2E5644] cursor-pointer bg-stone-200 h-2 rounded-lg" oninput="calculateNpImpact()">
+                <div class="flex justify-between text-[11px] text-stone-400 mt-1">
+                  <span>$5 / mo</span>
+                  <span>$150 / mo</span>
+                </div>
+              </div>
+
+              <!-- Slider 3: Employer Match Rate -->
+              <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                  <span class="text-stone-800">Donors Eligible for Corporate Match</span>
+                  <span id="np-match-rate-val" class="text-[#8A4A28] font-bold text-base">45% Match Rate</span>
+                </div>
+                <input type="range" id="np-match-rate" min="10" max="90" step="5" value="45" class="w-full accent-[#8A4A28] cursor-pointer bg-stone-200 h-2 rounded-lg" oninput="calculateNpImpact()">
+                <div class="flex justify-between text-[11px] text-stone-400 mt-1">
+                  <span>10% (Low)</span>
+                  <span>90% (Corporate heavy)</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right: Calculated Nonprofit Card -->
+          <div class="lg:col-span-5 bg-stone-800 text-white rounded-2xl p-7 sm:p-9 flex flex-col justify-between shadow-lg relative">
+            <div>
+              <div class="text-xs uppercase font-semibold tracking-widest text-stone-400 mb-1 font-sans-heading">
+                Total Annual Disbursed to Mission
+              </div>
+              <div id="np-total-revenue" class="text-4xl sm:text-5xl font-bold font-serif-heading tracking-tight text-emerald-300 mt-1">
+                $213,150
+              </div>
+              <p class="text-xs text-stone-300 mt-1 font-light">
+                Direct monthly gifts + unlocked employer matching pools
+              </p>
+
+              <div class="mt-6 pt-6 border-t border-white/15 space-y-3.5 text-xs sm:text-sm">
+                <div class="flex items-center justify-between text-stone-200">
+                  <span>📈 Monthly Recurring Revenue:</span>
+                  <span id="np-mrr" class="font-bold text-white">$17,762 / mo</span>
+                </div>
+                <div class="flex items-center justify-between text-stone-200">
+                  <span>🏢 Employer Matching Unlocked:</span>
+                  <span id="np-match-unlocked" class="font-bold text-emerald-300">$66,150 / yr</span>
+                </div>
+                <div class="flex items-center justify-between text-stone-200">
+                  <span>🛡️ Fee Skimming Saved (0% fee):</span>
+                  <span id="np-fee-savings" class="font-bold text-amber-300">$14,920 saved</span>
+                </div>
+                <div class="flex items-center justify-between text-stone-200">
+                  <span>⚡ Payout Speed:</span>
+                  <span class="font-bold text-white">Direct Verified ACH</span>
+                </div>
+              </div>
+
+              <p class="text-[11px] text-stone-400 mt-4 leading-normal italic">
+                *Zero platform percentage deductions ensures 100% of donor & match funding reaches your programs.
+              </p>
+            </div>
+
+            <div class="mt-8">
+              <a href="#contact" class="block w-full text-center py-3.5 px-4 bg-emerald-400 hover:bg-emerald-300 text-stone-900 font-bold text-sm rounded-xl transition shadow-sm">
+                Onboard Your Nonprofit (Free) &rarr;
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- MOBILE APP SHOWCASE SECTION (iOS & Android) -->
-  <section id="mobile-app" class="py-20 bg-white border-t border-b border-stone-200 scroll-mt-20">
+  <section id="mobile-app" class="py-20 bg-white border-b border-stone-200 scroll-mt-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -460,119 +826,6 @@
     </div>
   </section>
 
-  <!-- INTERACTIVE IMPACT CALCULATOR -->
-  <section id="calculator" class="py-20 bg-[#F4EFEA] border-b border-stone-200 scroll-mt-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200 shadow-sm relative overflow-hidden">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          <!-- Left: Controls -->
-          <div class="lg:col-span-7">
-            <div class="pill-tag inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4">
-              Workplace Generosity & Impact Simulator
-            </div>
-            <h2 class="text-3xl sm:text-4xl font-bold text-stone-900 font-serif-heading tracking-tight">
-              See the Power of Generosity in Your Team.
-            </h2>
-            <p class="mt-3 text-stone-600 text-sm sm:text-base leading-relaxed">
-              When employees give and their company matches, small acts of kindness multiply into life-changing community impact. Test different team sizes and matching allowances below:
-            </p>
-
-            <div class="mt-8 space-y-6">
-              
-              <!-- Slider 1: Headcount -->
-              <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
-                <div class="flex justify-between items-center text-sm font-semibold mb-2">
-                  <span class="text-stone-800">Team Headcount</span>
-                  <span id="headcount-val" class="text-[#2E5644] font-bold text-base">250 Employees</span>
-                </div>
-                <input type="range" id="headcount" min="20" max="2500" step="10" value="250" class="w-full accent-[#2E5644] cursor-pointer bg-stone-200 h-2 rounded-lg" oninput="calculateImpact()">
-                <div class="flex justify-between text-[11px] text-stone-400 mt-1">
-                  <span>20 people</span>
-                  <span>2,500+ team</span>
-                </div>
-              </div>
-
-              <!-- Slider 2: Annual Match -->
-              <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
-                <div class="flex justify-between items-center text-sm font-semibold mb-2">
-                  <span class="text-stone-800">Company Match per Employee</span>
-                  <span id="match-val" class="text-[#2E5644] font-bold text-base">$500 / year</span>
-                </div>
-                <input type="range" id="match" min="100" max="2500" step="50" value="500" class="w-full accent-[#2E5644] cursor-pointer bg-stone-200 h-2 rounded-lg" oninput="calculateImpact()">
-                <div class="flex justify-between text-[11px] text-stone-400 mt-1">
-                  <span>$100 / yr</span>
-                  <span>$2,500 / yr</span>
-                </div>
-              </div>
-
-              <!-- Slider 3: Participation -->
-              <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
-                <div class="flex justify-between items-center text-sm font-semibold mb-2">
-                  <span class="text-stone-800">Estimated Participation Rate</span>
-                  <span id="participation-val" class="text-[#8A4A28] font-bold text-base">65% of team</span>
-                </div>
-                <input type="range" id="participation" min="20" max="95" step="5" value="65" class="w-full accent-[#8A4A28] cursor-pointer bg-stone-200 h-2 rounded-lg" oninput="calculateImpact()">
-                <div class="flex justify-between text-[11px] text-stone-400 mt-1">
-                  <span>20% (Modest)</span>
-                  <span>95% (High Engagement)</span>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Right: Calculated Human Impact Card -->
-          <div class="lg:col-span-5 bg-[#2E5644] text-white rounded-2xl p-7 sm:p-9 flex flex-col justify-between shadow-lg relative">
-            <div>
-              <div class="text-xs uppercase font-semibold tracking-widest text-emerald-200/90 mb-1 font-sans-heading">
-                Collective Annual Impact
-              </div>
-              <div id="total-impact" class="text-4xl sm:text-5xl font-bold font-serif-heading tracking-tight text-white mt-1">
-                $162,500
-              </div>
-              <p class="text-xs text-emerald-100/80 mt-1 font-light">Employee donations + 100% company matching grant</p>
-
-              <!-- Tangible Community Impact Milestones -->
-              <div class="mt-6 pt-6 border-t border-white/15 space-y-3.5 text-xs sm:text-sm">
-                <div class="flex items-center justify-between text-white/90">
-                  <span>👥 Active Giving Champions:</span>
-                  <span id="active-donors" class="font-semibold text-white">163 team members</span>
-                </div>
-                <div class="flex items-center justify-between text-white/90">
-                  <span>🍲 Community Meals Provided*:</span>
-                  <span id="meals-impact" class="font-semibold text-emerald-200">~65,000 Meals</span>
-                </div>
-                <div class="flex items-center justify-between text-white/90">
-                  <span>⏳ HR Admin Hours Saved:</span>
-                  <span id="hours-saved" class="font-semibold text-white">~140 Hours / yr</span>
-                </div>
-                <div class="flex items-center justify-between text-white/90">
-                  <span>💚 Platform Cut Saved:</span>
-                  <span id="fees-saved" class="font-semibold text-emerald-200">$13,000 (0% fees)</span>
-                </div>
-              </div>
-
-              <p class="text-[11px] text-white/60 mt-4 leading-normal italic">
-                *Equivalent impact estimate based on hunger relief and education nonprofit benchmarks.
-              </p>
-            </div>
-
-            <div class="mt-8">
-              <a href="#contact" class="block w-full text-center py-3.5 px-4 bg-white hover:bg-stone-100 text-[#2E5644] font-bold text-sm rounded-xl transition shadow-sm">
-                Bring This to Your Team &rarr;
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <!-- GOVERNANCE & BOARD LEADERSHIP -->
   <section id="governance" class="py-20 bg-white border-b border-stone-200 scroll-mt-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -685,7 +938,7 @@
               <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-2">I am reaching out as *</label>
               <select class="w-full bg-[#FAF8F5] border border-stone-300 rounded-xl px-4 py-3 text-stone-900 text-sm focus:outline-none focus:border-[#2E5644] transition">
                 <option>Company / Employer (Workplace Giving & Matching)</option>
-                <option>Mobile App Early Access (iOS / Android Beta)</option>
+                <option>Individual Donor (Personal Micro-Giving Beta)</option>
                 <option>Nonprofit Organization (Partnership & Onboarding)</option>
                 <option>Press, Foundation or Media Inquiry</option>
               </select>
@@ -722,13 +975,14 @@
     </div>
   </footer>
 
-  <!-- Interactive Scripts -->
+  <!-- Interactive Scripts for Tabs & Calculators -->
   <script>
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       menu.classList.toggle('hidden');
     }
 
+    // Role tabs for #what section
     function switchTab(tab) {
       const tabs = ['corporate', 'employees', 'nonprofits'];
       tabs.forEach(t => {
@@ -744,27 +998,107 @@
       });
     }
 
-    function calculateImpact() {
-      const headcount = parseInt(document.getElementById('headcount').value);
-      const match = parseInt(document.getElementById('match').value);
-      const participationPct = parseInt(document.getElementById('participation').value);
+    // 3-Way Mode switch for Calculator
+    function switchCalcMode(mode) {
+      const modes = ['personal', 'corporate', 'nonprofit'];
+      modes.forEach(m => {
+        const panel = document.getElementById('calc-mode-' + m);
+        const btn = document.getElementById('calc-tab-' + m);
+        if (m === mode) {
+          panel.classList.remove('hidden');
+          btn.className = 'px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#2E5644] text-white transition shadow-sm flex items-center gap-2';
+        } else {
+          panel.classList.add('hidden');
+          btn.className = 'px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-transparent text-stone-600 hover:text-stone-900 transition flex items-center gap-2';
+        }
+      });
+    }
 
-      document.getElementById('headcount-val').innerText = headcount.toLocaleString() + ' Employees';
-      document.getElementById('match-val').innerText = '$' + match.toLocaleString() + ' / year';
-      document.getElementById('participation-val').innerText = participationPct + '% of team';
+    // 1. Personal Calculator: Coffee vs Donation
+    function setCoffeePreset(num) {
+      document.getElementById('coffee-slider').value = num;
+      calculatePersonalImpact();
+    }
+
+    function calculatePersonalImpact() {
+      const coffeesPerWeek = parseInt(document.getElementById('coffee-slider').value);
+      const isMatched = document.getElementById('personal-match-toggle').checked;
+      const coffeeCost = 5.50; // average artisan coffee price
+
+      const weeklyDonation = coffeesPerWeek * coffeeCost;
+      const monthlyDonation = weeklyDonation * 4.333;
+      const annualDonation = weeklyDonation * 52;
+      const totalAnnualImpact = isMatched ? annualDonation * 2 : annualDonation;
+
+      document.getElementById('coffee-val').innerText = coffeesPerWeek + (coffeesPerWeek === 1 ? ' Cup' : ' Cups') + ' / week ($' + weeklyDonation.toFixed(2) + '/wk)';
+      document.getElementById('personal-total-impact').innerText = '$' + Math.round(totalAnnualImpact).toLocaleString();
+
+      if (isMatched) {
+        document.getElementById('personal-monthly-breakdown').innerText = '$' + (monthlyDonation).toFixed(2) + '/mo from you + $' + (monthlyDonation).toFixed(2) + '/mo employer match';
+      } else {
+        document.getElementById('personal-monthly-breakdown').innerText = '$' + (monthlyDonation).toFixed(2) + '/mo (' + (coffeesPerWeek * 4) + ' coffees redirected/mo)';
+      }
+
+      // Benchmark impact calculations
+      const meals = Math.round(totalAnnualImpact * 2.5); // ~2.5 meals per dollar
+      const studentKits = Math.round(totalAnnualImpact / 20); // $20 kit
+      const waterMonths = Math.round(totalAnnualImpact / 6); // $6/mo clean water
+
+      document.getElementById('personal-meals').innerText = '~' + meals.toLocaleString() + ' Meals';
+      document.getElementById('personal-books').innerText = '~' + studentKits.toLocaleString() + ' Student Kits';
+      document.getElementById('personal-water').innerText = '~' + waterMonths.toLocaleString() + ' Months of Water';
+    }
+
+    // 2. Corporate Calculator
+    function calculateCorpImpact() {
+      const headcount = parseInt(document.getElementById('corp-headcount').value);
+      const match = parseInt(document.getElementById('corp-match').value);
+      const participationPct = parseInt(document.getElementById('corp-participation').value);
+
+      document.getElementById('corp-headcount-val').innerText = headcount.toLocaleString() + ' Employees';
+      document.getElementById('corp-match-val').innerText = '$' + match.toLocaleString() + ' / year';
+      document.getElementById('corp-participation-val').innerText = participationPct + '% of team';
 
       const activeGivers = Math.round(headcount * (participationPct / 100));
-      const totalImpactVal = activeGivers * match * 2; // Giver + Company Match
+      const totalImpactVal = activeGivers * match * 2;
       const adminHours = Math.round(activeGivers * 0.85);
       const feesSavedVal = Math.round(totalImpactVal * 0.08);
       const estimatedMeals = Math.round(totalImpactVal * 0.4);
 
-      document.getElementById('total-impact').innerText = '$' + totalImpactVal.toLocaleString();
-      document.getElementById('active-donors').innerText = activeGivers.toLocaleString() + ' team members';
-      document.getElementById('hours-saved').innerText = '~' + adminHours.toLocaleString() + ' Hours / yr';
-      document.getElementById('fees-saved').innerText = '$' + feesSavedVal.toLocaleString() + ' (0% fees)';
-      document.getElementById('meals-impact').innerText = '~' + estimatedMeals.toLocaleString() + ' Meals';
+      document.getElementById('corp-total-impact').innerText = '$' + totalImpactVal.toLocaleString();
+      document.getElementById('corp-active-donors').innerText = activeGivers.toLocaleString() + ' team members';
+      document.getElementById('corp-hours-saved').innerText = '~' + adminHours.toLocaleString() + ' Hours / yr';
+      document.getElementById('corp-fees-saved').innerText = '$' + feesSavedVal.toLocaleString() + ' (0% fees)';
+      document.getElementById('corp-meals-impact').innerText = '~' + estimatedMeals.toLocaleString() + ' Meals';
     }
+
+    // 3. Nonprofit Calculator
+    function calculateNpImpact() {
+      const donors = parseInt(document.getElementById('np-donors').value);
+      const avgGift = parseInt(document.getElementById('np-gift').value);
+      const matchRate = parseInt(document.getElementById('np-match-rate').value);
+
+      document.getElementById('np-donors-val').innerText = donors.toLocaleString() + ' Donors';
+      document.getElementById('np-gift-val').innerText = '$' + avgGift.toLocaleString() + ' / month';
+      document.getElementById('np-match-rate-val').innerText = matchRate + '% Match Rate';
+
+      const annualDirectDonations = donors * avgGift * 12;
+      const matchedDonors = Math.round(donors * (matchRate / 100));
+      const annualMatchUnlocked = matchedDonors * avgGift * 12;
+      const totalDisbursed = annualDirectDonations + annualMatchUnlocked;
+      const monthlyRunRate = Math.round(totalDisbursed / 12);
+      const feeSavings = Math.round(totalDisbursed * 0.07);
+
+      document.getElementById('np-total-revenue').innerText = '$' + totalDisbursed.toLocaleString();
+      document.getElementById('np-mrr').innerText = '$' + monthlyRunRate.toLocaleString() + ' / mo';
+      document.getElementById('np-match-unlocked').innerText = '$' + annualMatchUnlocked.toLocaleString() + ' / yr';
+      document.getElementById('np-fee-savings').innerText = '$' + feeSavings.toLocaleString() + ' saved';
+    }
+
+    // Run initial calculations on load
+    calculatePersonalImpact();
+    calculateCorpImpact();
+    calculateNpImpact();
   </script>
 </body>
 </html>
